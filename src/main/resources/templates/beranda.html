@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Beranda</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.3/css/all.min.css">
+    <style>
+        .navbar-custom {
+            background-color: #343a40; /* Warna latar belakang yang mirip dengan warna dark di Bootstrap */
+        }
+
+        .kucing-icon {
+            font-size: 24px; /* Sesuaikan ukuran ikon kucing */
+            padding-right: 5px; /* Berikan sedikit ruang antara ikon dan teks */
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-custom" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item has-text-white" href="#">
+                <span class="icon kucing-icon">
+                    <i class="fas fa-cat"></i> <!-- Gunakan ikon kucing dari Font Awesome -->
+                </span>
+                Beranda
+            </a>
+        </div>
+        <div class="navbar-menu">
+            <div class="navbar-start">
+                <a class="navbar-item has-text-white" href="/CatShelter/adopsi-kucing">Adopsi Kucing</a>
+                <a class="navbar-item has-text-white" href="/CatShelter/beli-produk">Beli Produk</a>
+            </div>
+            <div class="navbar-end">
+                <a class="navbar-item has-text-white" href="/CatShelter/">Log Out</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="section">
+        <div class="container">
+            <h1 class="title">CatShelter</h1>
+        </div>
+    </section>
+</body>
+
+</html>

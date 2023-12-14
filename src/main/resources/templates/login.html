@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.css">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .card {
+            max-width: 400px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <center><h2 class="card-title">Login</h2></center>
+                        <form id="loginForm">
+                            <div class="form-group">
+                                <label for="username">Username</label>
+                                <input type="text" class="form-control" id="username" name="username" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input type="password" class="form-control" id="password" name="password" required>
+                            </div>
+                            <center><button type="button" class="btn btn-primary" id="loginButton">Login</button></center><br><br>
+                            <center>Belum memiliki akun?<a href="/CatShelter/daftar-akun"> Daftar Sekarang</a></center>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.all.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Event handler for the login button
+            $("#loginButton").click(function () {
+                var username = $("#username").val();
+                var password = $("#password").val();
+
+                // Prepare the login data
+                var loginData = {
+                    username: username,
+                    password: password
+                };
+
+                // Send a POST request to the login endpoint
+                $.ajax({
+                    type: "POST",
+                    url: "http://localhost:8080/users/post/login",
+                    data: JSON.stringify(loginData),
+                    contentType: "application/json",
+                    success: function (response) {
+                        // Handle the login response
+                        if (response === "Login berhasil") {
+                            // Set status login ke true saat login berhasil
+                            sessionStorage.setItem('isLoggedIn', 'true');
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Login berhasil',
+                                showConfirmButton: false,
+                                timer: 1500
+                            }).then(function () {
+                                // Redirect to /CatShelter/home after the SweetAlert is closed
+                                window.location.href = "/CatShelter/home";
+                            });
+                        } else {
+                            // Show an error notification using SweetAlert
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Login gagal',
+                                text: response
+                            });
+                        }
+                    },
+                    error: function (xhr, textStatus, errorThrown) {
+                        // Show an error notification using SweetAlert for any AJAX error
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Terjadi kesalahan',
+                            text: errorThrown
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
